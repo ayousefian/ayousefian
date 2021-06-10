@@ -1,0 +1,150 @@
+#!/usr/bin/env python3
+''' template for ops435 assignment 1 script
+    put your script level docstring here...
+    you can have more than one line of docstring.
+    Please personlize the following author declaration:
+-----------------------------------------------------------------------
+OPS435 Assignment 1 - Winter 2021
+Program: a1_ayousefian.py 
+Author: "Afaf Yousefian"
+The python code in this file (a1_ayousefian.py) is original work written by
+"Afaf Yousefian". No code in this file is copied from any other source. 
+except those provided by the course instructor, including any person, 
+textbook, or on-line resource. I have not shared this python script. 
+with anyone or anything except for submission for grading.  
+I understand that the Academic Honesty Policy will be enforced and 
+violators will be reported, and appropriate action will be taken.
+'''
+
+import os
+import sys
+
+def leap_year(obj):
+1. Take the value of the year as your starting point. 
+2. Verify that year it is a leap year. 
+3. If it is a leap_year return value is true, otherwise the value return is false. 
+
+---------------------------
+
+def sanitize(obj1,obj2):
+1. Input the value of the first argument and the number of characters that are allowed.
+2. All invalid characters that are not allowed should be removed from its string in the first argument.
+3. Return the value of obj1 with only the characters from obj2 that are allowed.
+
+---------------------------
+
+def size_check(obj, intobj):
+1. For arguments obj and int(obj) use result of the sanitize function as well as number 8. 
+2. Check and differeniate the result's total length to the result required length of 8.
+3. If length of obj is euqal to 8, return a True value. Otherwise, return a False value. 
+
+---------------------------
+
+def range_check(obj1, obj2):
+1. As the first argument use year, month, or day respectively and for the second argument input a tuple. 
+2. Check whether the first argument is within the range of the second argument. 
+3. If the obj1 is within its range of the tuple range return a value of true, otherwise return false. 
+
+---------------------------
+    
+def usage():    
+1. The script should return a string that describes its usage.
+
+if __name__ == "__main__":
+
+---------------------------
+
+#Step1
+if len(sys.argv) != 2: 
+      print(usage())
+      sys.exit()
+
+Line 1: If statement which contains the command-line argument and function return that does not equal number 2. 
+Line 2: Print the usage function message to the screen if the number does not equal 2. 
+Line 3: Will exit from python if the number of the command-line argument does not equal number 2.  
+---------------------------
+#Step2
+month_name = ['Jan','Feb','Mar','Apr','May','Jun',
+                 'Jul','Aug','Sep','Oct','Nov','Dec']
+days_in_month = {1:31, 2:28, 3:31, 4:30, 5:31, 6:30,
+                    7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+   user_raw_data = sys.argv[1]
+
+Line 1: Create an object that is named "month_name" that is containing list of months in short form (Example:'Jan' , 'Feb'). 
+Line 2: Create an object that is named "days_in_month" that is containing a list of integers value that matches with the list of months and how many days are in that months. 
+Line 3: Create an object that is named user_raw_data that is containing a value that represents the second command-line argument. 
+
+---------------------------
+#Step3
+allow_chars = '0123456789'
+dob = sanitize(user_raw_data, allow_chars)
+print('Sanitized user data:', dob)
+
+Line 1: Create allow_char object that is containing the value of numbers 0 to 9 in a string. 
+Line 2: Create an object that is named "dob" that is containing a function value named sanitize which will contain the information for both user_raw_data and allow_chars respectively. 
+Line 3: Print the message 'Sanitized user data' including information for "dob" object to the screen. 
+---------------------------
+#Step4
+result = size_check(dob,8)
+if result == False:
+	print("Error 09: wrong data entered")
+        sys.exit()
+Line1: Create the object result that contains size_check value. Size_check will have the information of dob object and contains the digit 8 as an integer. 
+Line2: If statement will test if the value of result object is false. 
+Line3: Prints the message "Error 09: Wrong data entered" to the screen if the value of result object is false. 
+Line4: Exits function from python if the value of result object is false. 
+
+---------------------------
+#Step5
+year = int(dob[0:4])
+month = int(dob[4:6])
+day = int(dob[6:])
+
+Line1: Creates an object named year that contains the value 'dob' that uses first 4 digit (dob[0:4]) numbers and will convert to an integer (Decimalnumber).  
+Line2: Creates an object named month that contains the value 'dob' that uses the (dob[4:6]) digit to an integer. 
+Line3: Creates an object named day that the value 'dob' that uses digit int(dob[6:]) and will convert them to an integer. 
+
+---------------------------
+#Step 6
+   result = range_check(year,(1900,9999))
+   if result == False:
+       print("Error 10: year out of range, must be 1900 or later")
+       sys.exit()
+   result = range_check(month,(1,12))
+   if result == False:
+       print("Error 02: Wrong month entered")
+       sys.exit()
+   result = leap_year(year)
+   if result == True:
+       days_in_month[2] = 29
+   result = range_check(day, (1, days_in_month[month]))
+   if result == False:
+       print("Error 03: wrong day entered")
+       sys.exit()
+Line1: Creates an object named result which is containing a range_check which will have year object. Range_check will check the range of years here from 1900-9999. 
+Line2: If statement will test if the value of result object is false. 
+Line3: Prints the message "Error 10: year out of range, must be 1900 or later" to the screen if the statement is false. 
+Line4: Exits function from python if the result is false. 
+Line5: Result object contains a value named range_check function. Range_check contains the month object and will check the range values of 1-12. 
+Line6: If statement will test if the value of result object is false.
+Line7: If the result value of if statament is false, prints "Error 02: Wrong month entered". 
+Line8: Will exit from python if the result is false.
+Line9: Creates an object named result which is containing the value leap_year function. Leap_year contains the object of year. 
+Line10: If statement will test if the value of result object is true. 
+Line11: If the value of if statement is TRUE, then it will list the days_in_months function which will equal to 29. 
+Line12: Creates an object named result and contains value named range_check. Range_check will contain object named day. Also, in the brackets will contain a value of 1 as well as days_in_month function followed by value of the month. 
+Line13: If statement will test if the value of result object is false. 
+Line14: If the result is false prints the message "Error 03: wrong day entered" to the screen. 
+Line15: Will exit from python if the result is false. 
+
+---------------------------
+#Step 7
+   new_dob = str(month_name[month - 1])+' '+ str(day)+', '+str(year)
+
+Line1: Creates a new_dob object with a value that formats the output to month, day then year. 
+
+---------------------------
+#Step 8
+   print("Your date of birth is:", new_dob)  
+
+Line1: Prints the message 'Your date of birth is' which is follwed by the information of new_dob object to the screen.
